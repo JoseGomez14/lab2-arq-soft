@@ -1,0 +1,41 @@
+# Name of the workflow
+name: CI/CD Pipeline
+on:
+  #Manually trigger the workflow using the GitHub Actions UI
+  workflow_dispatch:
+
+  #Trigger the workflow on push from the master branch
+  push:
+    branches:
+      - master
+#Jobs to run in the workflow
+jobs:
+  #Testing job to run unit tests
+  tests:
+    name: Unit tests
+    #Run on Ubuntu using the latest version
+    runs-on: ubuntu-latest
+    steps:
+      #Check-out your repository
+      - name: Check out repository code
+        #This action checks out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+        uses: actions/checkout@v4
+
+      #Set up JDK and Version
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: "17"
+
+      #Set up Maven cache
+      - name: Cache Maven packages
+        #This action allows caching dependencies and build outputs to improve workflow execution time.
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          path: ~/.m2
+          restore-keys: ${{ runner.os }}-m2
+
+      #Run Tests
+      - name: Run Tests
+        run: mvn -B test
