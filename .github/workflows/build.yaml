@@ -7,7 +7,7 @@ on:
   #Trigger the workflow on push from the master branch
   push:
     branches:
-      - master
+      - deploy
 #Jobs to run in the workflow
 jobs:
   #Testing job to run unit tests
