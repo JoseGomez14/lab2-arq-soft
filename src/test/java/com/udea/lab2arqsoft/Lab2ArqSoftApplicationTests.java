@@ -19,7 +19,7 @@ class Lab2ArqSoftApplicationTests {
 
     @Test
     void version() {
-        assertEquals("ACTUAL VERSION: 1.0.0", dataController.version());
+        assertEquals("ACTUAL VERSION: 1.0.1", dataController.version());
     }
 
     @Test
