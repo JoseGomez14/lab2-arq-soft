@@ -148,14 +148,6 @@ jobs:
     env:
       DEPLOY_PACKAGE: artifact.zip
     steps:
-
-      #Check-out your repository
-      - name: Check out repository code
-        #This action checks out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1 # Checkout only the repository's tip commit instead of the full repository
-
       #Download package artifact
       - name: Download artifact
         #This action downloads an artifact from a workflow run
